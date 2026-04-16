@@ -1,0 +1,41 @@
+name: Pipeline CI/CD ESG Carbon
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+      
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+          
+      - name: Build com Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Executar Testes
+        run: mvn test
+
+  deploy-staging:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy em Staging
+        run: echo "Efetuando deploy no ambiente de homologação (Staging)..."
+
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy em Produção
+        run: echo "Efetuando deploy no ambiente final (Produção)..."

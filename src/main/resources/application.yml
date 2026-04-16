@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: esg-carbon-service
+  datasource:
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521/ORCL
+    username: rm559479
+    password: 020997
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.OracleDialect
+        format_sql: true
+    show-sql: false
+  flyway:
+    enabled: true
+    schemas: ESG_APP
+    default-schema: ESG_APP
+    locations: classpath:db/migration
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:oracle:thin:@oracle:1521/XEPDB1
+    username: ESG_APP
+    password: ESG_APP_PWD

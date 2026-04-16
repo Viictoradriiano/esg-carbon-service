@@ -1,0 +1,226 @@
+{
+  "info": {
+    "name": "ESG Carbon",
+    "_postman_id": "d7b1b7d3-5a8a-4b69-9f0f-000000000001",
+    "description": "Cole\u00e7\u00e3o dos endpoints ESG Carbon Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "basicUser",
+      "value": "admin"
+    },
+    {
+      "key": "basicPass",
+      "value": "admin123"
+    }
+  ],
+  "item": [
+    {
+      "name": "Listar Empresas",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/empresas"
+      }
+    },
+    {
+      "name": "Listar Emiss\u00f5es",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/emissoes"
+      }
+    },
+    {
+      "name": "Criar Emiss\u00e3o",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{basicUser}}"
+            },
+            {
+              "key": "password",
+              "value": "{{basicPass}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"companyId\": 1, \"scope\": \"SCOPE1\", \"dateAt\": \"2025-04-01\", \"amountTco2e\": 33.5, \"source\": \"Gerador Diesel\", \"notes\": \"Teste via Postman\"}"
+        },
+        "url": "{{baseUrl}}/emissoes"
+      }
+    },
+    {
+      "name": "Listar Compensa\u00e7\u00f5es",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/compensacoes"
+      }
+    },
+    {
+      "name": "Criar Compensa\u00e7\u00e3o",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{basicUser}}"
+            },
+            {
+              "key": "password",
+              "value": "{{basicPass}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"companyId\": 1, \"type\": \"REFORESTATION\", \"startDate\": \"2025-05-01\", \"endDate\": null, \"estimatedOffsetTco2e\": 120.0}"
+        },
+        "url": "{{baseUrl}}/compensacoes"
+      }
+    },
+    {
+      "name": "Atualizar Compensa\u00e7\u00e3o (status)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{basicUser}}"
+            },
+            {
+              "key": "password",
+              "value": "{{basicPass}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\": \"ACTIVE\", \"endDate\": null}"
+        },
+        "url": "{{baseUrl}}/compensacoes/1"
+      }
+    },
+    {
+      "name": "Excluir Compensa\u00e7\u00e3o",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{basicUser}}"
+            },
+            {
+              "key": "password",
+              "value": "{{basicPass}}"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/compensacoes/1"
+      }
+    },
+    {
+      "name": "Listar Agendamentos",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/agendamentos-reducao"
+      }
+    },
+    {
+      "name": "Criar Agendamento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{basicUser}}"
+            },
+            {
+              "key": "password",
+              "value": "{{basicPass}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"companyId\": 1, \"actionDesc\": \"Troca de ilumina\\u00e7\\u00e3o por LED\", \"scheduledDate\": \"2025-06-01\", \"estimatedReductionTco2e\": 40.0}"
+        },
+        "url": "{{baseUrl}}/agendamentos-reducao"
+      }
+    },
+    {
+      "name": "Atualizar Status Agendamento",
+      "request": {
+        "method": "PUT",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{basicUser}}"
+            },
+            {
+              "key": "password",
+              "value": "{{basicPass}}"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/agendamentos-reducao/1/status/ACTIVE"
+      }
+    },
+    {
+      "name": "Indicadores",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/indicadores"
+      }
+    },
+    {
+      "name": "Impacto por Compensa\u00e7\u00e3o",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/impacto/1"
+      }
+    }
+  ]
+}
